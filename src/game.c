@@ -24,6 +24,20 @@ static void update_head(game_t *game, unsigned int snum);
 /* Task 1 */
 game_t *create_default_game() {
   // TODO: Implement this function.
+  //
+  for(int i = 0; i < 18; i++) {
+        printf("#");
+  }
+    printf("\n");
+    for(int i = 0; i < 18; i++) { 
+        for(int i = 0; i < 18; i++) {
+            printf(" ");
+        }
+        printf("#");
+        printf("\n");
+    }
+
+
   return NULL;
 }
 
