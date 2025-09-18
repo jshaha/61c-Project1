@@ -24,26 +24,51 @@ static void update_head(game_t *game, unsigned int snum);
 /* Task 1 */
 game_t *create_default_game() {
   // TODO: Implement this function.
-  //
-  //
-  //
 
   game_t *game = malloc(sizeof(game_t));
+    if (game == NULL) {
+        printf("*game memory allocated failed\n");
+        return NULL;
+    }
     game->num_rows = 18;
-    game->board = malloc(18 * sizeof(char*))
+    game->board = malloc(18 * sizeof(char*));
+    if (game->board == NULL) {
+        printf("game->board memory failed\n");
+        return NULL;
+    }
     game->num_snakes = 1;
-    game->board[0] = malloc(20*sizeof(char));
-    game->board[0] = "#                   #";
 
-  for(int i = 0; i <= 20; i++) {
-      game-board[i] = malloc(20 * size(char);
-              game_board[i] = "#                    #"
+    //struct defining
+    game->snakes = malloc(sizeof(snake_t));
+    if (game->snakes == NULL) {
+        printf("snake struct memory allocation failed\n");
+        return NULL;
+    }
+    game->snakes[0].tail_row = 2;
+    game->snakes[0].tail_col = 2;
+    game->snakes[0].head_row = 2;
+    game->snakes[0].head_col = 4;
+    game->snakes[0].live = true;
+
+    //game roof
+    game->board[0] = malloc(21 * sizeof(char));
+    strcpy(game->board[0], "####################\n");
+
+    //border of board & starting point
+    for(int i = 1; i < 17; i++) { 
+        game->board[i] = malloc(21 * sizeof(char));
+        if (i == 2) { 
+            strcpy(game->board[i], "# d>D    *         #\n");
+        } else { 
+            strcpy(game->board[i], "#                  #\n");
+        }
     }
 
-  }
- return game
-  
+    // game floor
+    game->board[17] = malloc(21 * sizeof(char));
+    strcpy(game->board[17], "####################\n");
 
+ return game;
 }
 
 /* Task 2 */
