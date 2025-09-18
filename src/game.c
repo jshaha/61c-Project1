@@ -25,20 +25,25 @@ static void update_head(game_t *game, unsigned int snum);
 game_t *create_default_game() {
   // TODO: Implement this function.
   //
-  for(int i = 0; i < 18; i++) {
-        printf("#");
-  }
-    printf("\n");
-    for(int i = 0; i < 18; i++) { 
-        for(int i = 0; i < 18; i++) {
-            printf(" ");
-        }
-        printf("#");
-        printf("\n");
+  //
+  //
+
+  game_t *game = malloc(sizeof(game_t));
+    game->num_rows = 18;
+    game->board = malloc(18 * sizeof(char*))
+    game->num_snakes = 1;
+    game->board[0] = malloc(20*sizeof(char));
+    game->board[0] = "#                   #";
+
+  for(int i = 0; i <= 20; i++) {
+      game-board[i] = malloc(20 * size(char);
+              game_board[i] = "#                    #"
     }
 
+  }
+ return game
+  
 
-  return NULL;
 }
 
 /* Task 2 */
