@@ -167,14 +167,13 @@ if (c == 'w' || c == 'a'|| c == 's' || c == 'd' || c == 'x' || c == 'W' || c == 
 static char body_to_tail(char c) {
   // TODO: Implement this function.
   char body[4] = {'^', '<', 'v', '>'};
-  char head[4] = {'w', 'a', 's', 'd'};
+  char tail[4] = {'w', 'a', 's', 'd'};
   for(int i = 0; i < 4; i++) {
     if(c == body[i]) {
-        c = head[i];
-  }
-
-  return '?';
+        return tail[i];
     }
+  }
+  return c;
 }
 
 
@@ -185,15 +184,14 @@ static char body_to_tail(char c) {
 */
 static char head_to_body(char c) {
   // TODO: Implement this function.
-  char head[4] = {'^', '<', 'v', '>'};
+  char head[4] = {'W', 'A', 'S', 'D'};
   char body[4] = {'^', '<', 'v', '>'};
   for(int i = 0; i < 4; i++) {
     if(c == head[i]) {
-        c = body[i];
-  }
-
-  return '?';
+        return body[i];
     }
+  }
+  return c;
 }
 
 /*
@@ -214,7 +212,7 @@ static unsigned int get_next_row(unsigned int cur_row, char c) {
   for (int i = 0; i < 3; i++) {
     if(c == allowed[i]) {
         return cur_row + 1;
-    }else {
+    } else {
         if(c == disallowed[i]) {
             return cur_row - 1;
         }
@@ -235,7 +233,7 @@ static unsigned int get_next_col(unsigned int cur_col, char c) {
   for (int i = 0; i < 3; i++) {
     if(c == allowed[i]) {
         return cur_col + 1;
-    }else {
+    } else {
         if(c == disallowed[i]) {
             return cur_col - 1;
         }
@@ -254,8 +252,8 @@ static unsigned int get_next_col(unsigned int cur_col, char c) {
 */
 static char next_square(game_t *game, unsigned int snum) {
   // TODO: Implement this function.
-    int snake_row = game->snakes[snum].head_row;
-    int snake_col = game->snakes[snum].head_col;
+    unsigned int snake_row = game->snakes[snum].head_row;
+    unsigned int snake_col = game->snakes[snum].head_col;
     char snake_char = get_board_at(game, snake_row, snake_col);
 
   return get_board_at(game,get_next_row(snake_row, snake_char), get_next_col(snake_col, snake_char));
@@ -274,16 +272,16 @@ static char next_square(game_t *game, unsigned int snum) {
 */
 static void update_head(game_t *game, unsigned int snum) {
   // TODO: Implement this function.
-    int snake_row = game->snakes[snum].head_row;
-    int snake_col = game->snakes[snum].head_col;
+    unsigned int snake_row = game->snakes[snum].head_row;
+    unsigned int snake_col = game->snakes[snum].head_col;
     char snake_char = get_board_at(game, snake_row, snake_col);
 
     
-    set_board_at(game, snake_row, snake_col, 
+    set_board_at(game, snake_row, snake_col, head_to_body(snake_char)); 
     game->snakes[snum].head_row = get_next_row(snake_row,snake_char);
     game->snakes[snum].head_col = get_next_col(snake_row,snake_char);
 
-   get_board_at(game,get_next_row(snake_row, snake_char), get_next_col(snake_col, snake_char));
+   set_board_at(game, game->snakes[snum].head_row, game->snakes[snum].head_col, snake_char);
 }
 
 /*
