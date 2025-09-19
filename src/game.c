@@ -133,14 +133,14 @@ static bool is_tail(char c) {
   return false; 
 }
 
-/*
+i/*
   Returns true if c is part of the snake's head.
   The snake consists of these characters: "WASDx"
   Returns false otherwise.
 */
 static bool is_head(char c) {
   // TODO: Implement this function.
-    if (c == 'W' || c == 'A'|| c == 'S' || c == 'D') {
+    if (c == 'W' || c == 'A'|| c == 'S' || c == 'D' || c == 'x') {
   return true;
   }
   return false;
@@ -152,6 +152,18 @@ static bool is_head(char c) {
 */
 static bool is_snake(char c) {
   // TODO: Implement this function.
+if (c == 'w' || c == 'a'|| c == 's' || c == 'd' || c == 'x' || c == 'W' || c == 'A'|| c == 'S' || c == 'D'|| c == '^' || c == '<' || c == '>' || c == 'v') {
+  return true;
+  }
+  return false;
+}
+
+/*
+  Returns true if c is part of the snake.
+  The snake consists of these characters: "wasd^<v>WASDx"
+*/
+static bool is_snake(char c) {
+  // TODO: Implement thi
   return true;
 }
 
