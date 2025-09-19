@@ -174,6 +174,30 @@ static bool is_snake(char c) {
 */
 static char body_to_tail(char c) {
   // TODO: Implement this function.
+  char body[4] = {'^', '<', 'v', '>'};
+  char head[4] = {'w', 'a', 's', 'd'};
+  for(int i = 0; i < 4; i++) {
+    if c == body[i] {
+        c = head[i];
+  }
+
+  return '?';
+}
+
+/*
+  Converts a character in the snake's head ("WASD")
+  to the matching character representing the snake's
+  body ("^<v>").
+*/
+static char head_to_body(char c) {
+  // TODO: Implement this function.
+  char head[4] = {'^', '<', 'v', '>'};
+  char body[4] = {'^', '<', 'v', '>'};
+  for(int i = 0; i < 4; i++) {
+    if c == head[i] {
+        c = body[i];
+  }
+
   return '?';
 }
 
@@ -185,6 +209,7 @@ static char body_to_tail(char c) {
 static char head_to_body(char c) {
   // TODO: Implement this function.
   return '?';
+  return '?';
 }
 
 /*
@@ -194,7 +219,18 @@ static char head_to_body(char c) {
 */
 static unsigned int get_next_row(unsigned int cur_row, char c) {
   // TODO: Implement this function.
-  return cur_row;
+  char allowed = {'v' , 's' , 'S'};
+  char disallowed = {'^', 'w', 'W'};
+  for (int i = 0; i < 3; i++) {
+    if(c == allowed[i]) {
+        return cur_row + 1;
+    }else {
+        if(c == disallowed[i]) {
+            return cur_row - 1;
+        }
+        return cur_row
+        }
+    }
 }
 
 /*
@@ -204,7 +240,19 @@ static unsigned int get_next_row(unsigned int cur_row, char c) {
 */
 static unsigned int get_next_col(unsigned int cur_col, char c) {
   // TODO: Implement this function.
-  return cur_col;
+  char allowed = {'>' , 'd' , 'D'};
+  char disallowed = {'<', 'a', 'A'};
+  for (int i = 0; i < 3; i++) {
+    if(c == allowed[i]) {
+        return cur_col + 1;
+    }else {
+        if(c == disallowed[i]) {
+            return cur_col - 1;
+        }
+        return cur_col
+        }
+    }
+}
 }
 
 /*
