@@ -52,21 +52,21 @@ game_t *create_default_game() {
 
     //game roof
     game->board[0] = malloc(21 * sizeof(char));
-    strcpy(game->board[0], "####################\n");
+    strcpy(game->board[0], "####################");
 
     //border of board & starting point
     for(int i = 1; i < 17; i++) { 
         game->board[i] = malloc(21 * sizeof(char));
         if (i == 2) { 
-            strcpy(game->board[i], "# d>D    *         #\n");
+            strcpy(game->board[i], "# d>D    *         #");
         } else { 
-            strcpy(game->board[i], "#                  #\n");
+            strcpy(game->board[i], "#                  #");
         }
     }
 
     // game floor
     game->board[17] = malloc(21 * sizeof(char));
-    strcpy(game->board[17], "####################\n");
+    strcpy(game->board[17], "####################");
 
  return game;
 }
@@ -88,6 +88,9 @@ void free_game(game_t *game) {
 /* Task 3 */
 void print_board(game_t *game, FILE *fp) {
   // TODO: Implement this function.
+  for(int i = 0; i < game->num_rows; i++) {
+    fprintf(fp,"%s\n", game->board[i]);
+  }
   return;
 }
 
