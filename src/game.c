@@ -127,7 +127,10 @@ static void set_board_at(game_t *game, unsigned int row, unsigned int col, char 
 */
 static bool is_tail(char c) {
   // TODO: Implement this function.
+  if (c == 'w' || c == 'a'|| c == 's' || c == 'd') {
   return true;
+  }
+  return false; 
 }
 
 /*
@@ -137,7 +140,10 @@ static bool is_tail(char c) {
 */
 static bool is_head(char c) {
   // TODO: Implement this function.
+    if (c == 'W' || c == 'A'|| c == 'S' || c == 'D') {
   return true;
+  }
+  return false;
 }
 
 /*
