@@ -51,22 +51,22 @@ game_t *create_default_game() {
     game->snakes[0].live = true;
 
     //game roof
-    game->board[0] = malloc(21 * sizeof(char));
-    strcpy(game->board[0], "####################");
+    game->board[0] = malloc(22 * sizeof(char));
+    strcpy(game->board[0], "####################\n");
 
     //border of board & starting point
     for(int i = 1; i < 17; i++) { 
-        game->board[i] = malloc(21 * sizeof(char));
+        game->board[i] = malloc(22 * sizeof(char));
         if (i == 2) { 
-            strcpy(game->board[i], "# d>D    *         #");
+            strcpy(game->board[i], "# d>D    *         #\n");
         } else { 
-            strcpy(game->board[i], "#                  #");
+            strcpy(game->board[i], "#                  #\n");
         }
     }
 
     // game floor
-    game->board[17] = malloc(21 * sizeof(char));
-    strcpy(game->board[17], "####################");
+    game->board[17] = malloc(22 * sizeof(char));
+    strcpy(game->board[17], "####################\n");
 
  return game;
 }
