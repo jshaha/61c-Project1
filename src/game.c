@@ -133,7 +133,7 @@ static bool is_tail(char c) {
   return false; 
 }
 
-i/*
+/*
   Returns true if c is part of the snake's head.
   The snake consists of these characters: "WASDx"
   Returns false otherwise.
@@ -158,14 +158,6 @@ if (c == 'w' || c == 'a'|| c == 's' || c == 'd' || c == 'x' || c == 'W' || c == 
   return false;
 }
 
-/*
-  Returns true if c is part of the snake.
-  The snake consists of these characters: "wasd^<v>WASDx"
-*/
-static bool is_snake(char c) {
-  // TODO: Implement thi
-  return true;
-}
 
 /*
   Converts a character in the snake's body ("^<v>")
@@ -177,12 +169,14 @@ static char body_to_tail(char c) {
   char body[4] = {'^', '<', 'v', '>'};
   char head[4] = {'w', 'a', 's', 'd'};
   for(int i = 0; i < 4; i++) {
-    if c == body[i] {
+    if(c == body[i]) {
         c = head[i];
   }
 
   return '?';
+    }
 }
+
 
 /*
   Converts a character in the snake's head ("WASD")
@@ -194,11 +188,12 @@ static char head_to_body(char c) {
   char head[4] = {'^', '<', 'v', '>'};
   char body[4] = {'^', '<', 'v', '>'};
   for(int i = 0; i < 4; i++) {
-    if c == head[i] {
+    if(c == head[i]) {
         c = body[i];
   }
 
   return '?';
+    }
 }
 
 /*
@@ -206,11 +201,6 @@ static char head_to_body(char c) {
   to the matching character representing the snake's
   body ("^<v>").
 */
-static char head_to_body(char c) {
-  // TODO: Implement this function.
-  return '?';
-  return '?';
-}
 
 /*
   Returns cur_row + 1 if c is 'v' or 's' or 'S'.
@@ -219,8 +209,8 @@ static char head_to_body(char c) {
 */
 static unsigned int get_next_row(unsigned int cur_row, char c) {
   // TODO: Implement this function.
-  char allowed = {'v' , 's' , 'S'};
-  char disallowed = {'^', 'w', 'W'};
+  char allowed[] = {'v' , 's' , 'S'};
+  char disallowed[] = {'^', 'w', 'W'};
   for (int i = 0; i < 3; i++) {
     if(c == allowed[i]) {
         return cur_row + 1;
@@ -228,9 +218,9 @@ static unsigned int get_next_row(unsigned int cur_row, char c) {
         if(c == disallowed[i]) {
             return cur_row - 1;
         }
-        return cur_row
         }
     }
+  return cur_row;
 }
 
 /*
@@ -240,8 +230,8 @@ static unsigned int get_next_row(unsigned int cur_row, char c) {
 */
 static unsigned int get_next_col(unsigned int cur_col, char c) {
   // TODO: Implement this function.
-  char allowed = {'>' , 'd' , 'D'};
-  char disallowed = {'<', 'a', 'A'};
+  char allowed[] = {'>' , 'd' , 'D'};
+  char disallowed[] = {'<', 'a', 'A'};
   for (int i = 0; i < 3; i++) {
     if(c == allowed[i]) {
         return cur_col + 1;
@@ -249,11 +239,11 @@ static unsigned int get_next_col(unsigned int cur_col, char c) {
         if(c == disallowed[i]) {
             return cur_col - 1;
         }
-        return cur_col
-        }
     }
+    }
+  return cur_col;
 }
-}
+
 
 /*
   Task 4.2
@@ -264,11 +254,15 @@ static unsigned int get_next_col(unsigned int cur_col, char c) {
 */
 static char next_square(game_t *game, unsigned int snum) {
   // TODO: Implement this function.
-  return '?';
+    int snake_row = game->snakes[snum].head_row;
+    int snake_col = game->snakes[snum].head_col;
+    char snake_char = get_board_at(game, snake_row, snake_col);
+
+  return get_board_at(game,get_next_row(snake_row, snake_char), get_next_col(snake_col, snake_char));
 }
 
 /*
-  Task 4.3
+  Task 4.3:
 
   Helper function for update_game. Update the head...
 
@@ -280,7 +274,16 @@ static char next_square(game_t *game, unsigned int snum) {
 */
 static void update_head(game_t *game, unsigned int snum) {
   // TODO: Implement this function.
-  return;
+    int snake_row = game->snakes[snum].head_row;
+    int snake_col = game->snakes[snum].head_col;
+    char snake_char = get_board_at(game, snake_row, snake_col);
+
+    
+    set_board_at(game, snake_row, snake_col, 
+    game->snakes[snum].head_row = get_next_row(snake_row,snake_char);
+    game->snakes[snum].head_col = get_next_col(snake_row,snake_char);
+
+   get_board_at(game,get_next_row(snake_row, snake_char), get_next_col(snake_col, snake_char));
 }
 
 /*
