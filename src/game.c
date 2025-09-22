@@ -336,7 +336,7 @@ void update_game(game_t *game, int (*add_food)(game_t *game)) {
 char *read_line(FILE *fp) {
   // TODO: Implement this function.
 
-    size_t buf_size = 256;
+    size_t buf_size = 64;
     char* buffer = malloc(buf_size);
     if (buffer == NULL) { 
         printf("buffer malloc failed");
@@ -373,6 +373,26 @@ char *read_line(FILE *fp) {
 /* Task 5.2 */
 game_t *load_board(FILE *fp) {
   // TODO: Implement this function.
+  game_t *game = malloc(sizeof(game_t));
+    if (game == NULL) {
+        printf("*game memory allocated failed\n");
+        return NULL;
+    }
+    int num_lines = 0;
+    while (read_line(fp) != NULL) {
+        char line[] = read_line(fp);
+        game->num_rows += 1;i
+        num_lines += 1;
+        for(int i = 0; i < strlen(line); i++) {
+
+    }
+
+    if (game->board == NULL) {
+        printf("game->board memory failed\n");
+        return NULL;
+    }
+
+    while(
   return NULL;
 }
 
