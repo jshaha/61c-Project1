@@ -335,7 +335,39 @@ void update_game(game_t *game, int (*add_food)(game_t *game)) {
 /* Task 5.1 */
 char *read_line(FILE *fp) {
   // TODO: Implement this function.
-  return NULL;
+
+    size_t buf_size = 256;
+    char* buffer = malloc(buf_size);
+    if (buffer == NULL) { 
+        printf("buffer malloc failed");
+        return NULL;
+    }
+
+    if (fgets(buffer, buf_size, fp) == NULL) { 
+        free(buffer);
+        return NULL;
+    }
+
+    size_t len = strlen(buffer);
+    while (buffer[len-1] != '\n' && len > 0) {
+        buf_size *= 2;
+        char* double_buf = realloc(buffer, buf_size);
+        if (double_buf == NULL) { 
+            printf("double_buf realloc failed");
+            free(buffer);
+            return NULL;
+        } else { 
+            buffer = double_buf;
+        }
+
+        char* result = fgets(buffer + len, buf_size - len, fp);
+        if (result == NULL) { 
+            break;
+        }
+        len = strlen(buffer);
+    }
+
+  return buffer;
 }
 
 /* Task 5.2 */
