@@ -278,8 +278,8 @@ static void update_head(game_t *game, unsigned int snum) {
 
     
     set_board_at(game, snake_row, snake_col, head_to_body(snake_char)); 
-    game->snakes[snum].head_row = get_next_row(snake_row,snake_char);
-    game->snakes[snum].head_col = get_next_col(snake_row,snake_char);
+    game->snakes[snum].head_row = get_next_row(snake_row, snake_char);
+    game->snakes[snum].head_col = get_next_col(snake_col, snake_char);
 
    set_board_at(game, game->snakes[snum].head_row, game->snakes[snum].head_col, snake_char);
 }
@@ -296,7 +296,17 @@ static void update_head(game_t *game, unsigned int snum) {
 */
 static void update_tail(game_t *game, unsigned int snum) {
   // TODO: Implement this function.
-  return;
+    unsigned int tail_row = game->snakes[snum].tail_row;
+    unsigned int tail_col = game->snakes[snum].tail_col;
+    char tail_char = get_board_at(game, tail_row, tail_col);
+    int next_row = get_next_row(tail_row, tail_char);
+    int next_col = get_next_col(tail_col, tail_char);
+    set_board_at(game, tail_row, tail_col, ' ');
+    char replaced = get_board_at(game, next_row, next_col);
+    set_board_at(game, next_row, next_col, body_to_tail(replaced));
+    game->snakes[snum].tail_row = next_row;
+    game->snakes[snum].tail_col = next_col;
+    return;
 }
 
 /* Task 4.5 */
