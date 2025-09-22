@@ -417,8 +417,8 @@ static void find_head(game_t *game, unsigned int snum) {
         curr_tail_row = new_tail_row;
         curr_tail_col = new_tail_col;
     }
-    game->snake[snum].head_row = curr_tail_row;
-    game->snake[snum].head_col = curr_tail_col;
+    game->snakes[snum].head_row = curr_tail_row;
+    game->snakes[snum].head_col = curr_tail_col;
   return;
 }
 
