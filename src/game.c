@@ -378,22 +378,22 @@ game_t *load_board(FILE *fp) {
         printf("*game memory allocated failed\n");
         return NULL;
     }
-    int num_lines = 0;
-    while (read_line(fp) != NULL) {
-        char line[] = read_line(fp);
-        game->num_rows += 1;i
-        num_lines += 1;
-        for(int i = 0; i < strlen(line); i++) {
+    game->board = NULL;
+    game->num_rows = 0;
+    char *line; 
 
-    }
-
+    while ((line = read_line(fp)) != NULL) {
+        game->num_rows++;
+        game->board = realloc(game->board, game->num_rows * sizeof(char*));
     if (game->board == NULL) {
         printf("game->board memory failed\n");
         return NULL;
     }
-
-    while(
-  return NULL;
+    game->board[game->num_rows - 1] = line;
+    }
+    game->snakes = NULL;
+    game->num_snakes = 0;
+    return game;
 }
 
 /*
@@ -406,6 +406,19 @@ game_t *load_board(FILE *fp) {
 */
 static void find_head(game_t *game, unsigned int snum) {
   // TODO: Implement this function.
+    unsigned int curr_tail_row = game->snakes[snum].tail_row;
+    unsigned int curr_tail_col = game->snakes[snum].tail_col; 
+    char tail_char = get_board_at(game, curr_tail_row, curr_tail_col);
+    unsigned int new_tail_row;
+    unsigned int new_tail_col;
+    while(!is_head(tail_char)) {
+        new_tail_row = get_next_row(curr_tail_row, curr_tail_col);
+        new_tail_col = get_next_col(curr_tail_row, curr_tail_col);
+        curr_tail_row = new_tail_row;
+        curr_tail_col = new_tail_col;
+    }
+    game->snake[snum].head_row = curr_tail_row;
+    game->snake[snum].head_col = curr_tail_col;
   return;
 }
 
