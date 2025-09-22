@@ -299,8 +299,8 @@ static void update_tail(game_t *game, unsigned int snum) {
     unsigned int tail_row = game->snakes[snum].tail_row;
     unsigned int tail_col = game->snakes[snum].tail_col;
     char tail_char = get_board_at(game, tail_row, tail_col);
-    int next_row = get_next_row(tail_row, tail_char);
-    int next_col = get_next_col(tail_col, tail_char);
+    unsigned int next_row = get_next_row(tail_row, tail_char);
+    unsigned int next_col = get_next_col(tail_col, tail_char);
     set_board_at(game, tail_row, tail_col, ' ');
     char replaced = get_board_at(game, next_row, next_col);
     set_board_at(game, next_row, next_col, body_to_tail(replaced));
@@ -312,6 +312,23 @@ static void update_tail(game_t *game, unsigned int snum) {
 /* Task 4.5 */
 void update_game(game_t *game, int (*add_food)(game_t *game)) {
   // TODO: Implement this function.
+  for (unsigned int i = 0; i < game->num_snakes; i++) { 
+      if (game->snakes[i].live == false) { 
+          continue;
+      }
+      char next = next_square(game, i);
+      if (next == '#' || is_snake(next)) { 
+          set_board_at(game, game->snakes[i].head_row, game->snakes[i].head_col, 'x');
+          game->snakes[i].live = false;
+          continue;
+      } else if (next == '*') { 
+          update_head(game, i);
+          add_food(game);
+      } else {
+          update_head(game, i);
+          update_tail(game, i);
+      }
+  }
   return;
 }
 
