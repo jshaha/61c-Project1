@@ -56,6 +56,11 @@ game_t *create_default_game() {
 
     //game roof
     game->board[0] = malloc(22 * sizeof(char));
+    if(game->board[0] == NULL) {
+        free(game);
+        free(game->board);
+        free(game->snakes);
+    }
     strcpy(game->board[0], "####################\n");
 
     //border of board & starting point
@@ -389,8 +394,9 @@ game_t *load_board(FILE *fp) {
 
     while ((line = read_line(fp)) != NULL) {
         game->num_rows++;
-        game->board = realloc(game->board, game->num_rows * sizeof(char*));
-    if (game->board == NULL) 
+        // game->board = realloc(game->board, game->num_rows * sizeof(char*));
+        char **temp_board = realloc(game->board, game->num_rows * sizeof(char*));
+    if (temp_board == NULL) 
     {
         for (int k = 0; k < game->num_rows - 1; k++) { 
             free(game->board[k]);
@@ -401,6 +407,7 @@ game_t *load_board(FILE *fp) {
         printf("game->board memory failed\n");
         return NULL;
     }
+    game->board = temp_board;
     game->board[game->num_rows - 1] = line;
     }
     game->snakes = NULL;
