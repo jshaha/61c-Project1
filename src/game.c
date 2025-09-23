@@ -348,26 +348,27 @@ char *read_line(FILE *fp) {
         return NULL;
     }
 
-    size_t len = strlen(buffer);
-    while (len > 0 && buffer[len-1] != '\n' && len > 0) {
+    size_t len = 0;
+    while (fgets(buffer + len, (int)(buf_size - len), fp)) {
+        len += strlen(buffer + len);
+        if (len > 0 && buffer[len - 1] == '\n') break;
         buf_size *= 2;
-        char* double_buf = realloc(buffer, buf_size);
-        if (double_buf == NULL) { 
-            printf("double_buf realloc failed");
+        char *temp = realloc(buffer, buf_size);
+        if (!temp) {      
             free(buffer);
             return NULL;
-        } else { 
-            buffer = double_buf;
         }
-
-        char* result = fgets(buffer + len, (int)(buf_size - len), fp);
-        if (result == NULL) { 
-            break;
-        }
-        len = strlen(buffer);
+        buffer = tmp;
     }
+    if (len == 0) {    
+        free(buffer);
+        return NULL;
+    }
+    char *exact = realloc(buffer, len + 1);
+    if (exact) buffer = exact;
 
-  return buffer;
+    return buffer;
+
 }
 
 /* Task 5.2 */
