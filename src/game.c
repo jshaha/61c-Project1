@@ -27,12 +27,14 @@ game_t *create_default_game() {
 
   game_t *game = malloc(sizeof(game_t));
     if (game == NULL) {
+        free(game);
         printf("*game memory allocated failed\n");
         return NULL;
     }
     game->num_rows = 18;
     game->board = malloc(18 * sizeof(char*));
     if (game->board == NULL) {
+        free(game);
         printf("game->board memory failed\n");
         return NULL;
     }
@@ -41,6 +43,8 @@ game_t *create_default_game() {
     //struct defining
     game->snakes = malloc(sizeof(snake_t));
     if (game->snakes == NULL) {
+        free(game->board);
+        free(game);
         printf("snake struct memory allocation failed\n");
         return NULL;
     }
@@ -388,7 +392,9 @@ game_t *load_board(FILE *fp) {
         game->board = realloc(game->board, game->num_rows * sizeof(char*));
     if (game->board == NULL) 
     {
-        for (int k = 0; k < game->num_rows; k++) free(game->board[k]);
+        for (int k = 0; k < game->num_rows - 1; k++) { 
+            free(game->board[k])
+        };
             free(line);
             free(game->board);
             free(game);
