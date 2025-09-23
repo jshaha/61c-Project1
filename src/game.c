@@ -349,7 +349,7 @@ char *read_line(FILE *fp) {
     }
 
     size_t len = strlen(buffer);
-    while (buffer[len-1] != '\n' && len > 0) {
+    while (len > 0 && buffer[len-1] != '\n' && len > 0) {
         buf_size *= 2;
         char* double_buf = realloc(buffer, buf_size);
         if (double_buf == NULL) { 
@@ -443,7 +443,6 @@ game_t *initialize_snakes(game_t *game) {
                 game->snakes[game->num_snakes - 1].tail_col = j;
                 find_head(game, game->num_snakes - 1);
                 game->snakes[game->num_snakes - 1].live = true;
-                j++;
             }
         }
     }

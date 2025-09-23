@@ -43,25 +43,23 @@ int main(int argc, char *argv[]) {
 
   // Read board from file, or create default board
   //
-
-
   if (in_filename != NULL) {
       FILE* file = fopen(in_filename, "r");
     // TODO: Load the board from in_filename
     if(file == NULL) {
         return -1;
   }
-    game_t *game = load_board(file);
+    game = load_board(file);
   initialize_snakes(game);
   fclose(file);
   } else if (io_stdin) {
     // TODO: Load the board from stdin
-    game_t *game = load_board(stdin);
+    game = load_board(stdin);
     // TODO: Then call initialize_snakes on the game you made
     initialize_snakes(game);
   } else {
     // TODO: Create default game
-    game_t *game = create_default_game();
+    game = create_default_game();
   }
 
   // TODO: Update game. Use the deterministic_food function
@@ -72,7 +70,7 @@ int main(int argc, char *argv[]) {
   // Write updated board to file or stdout
   if (out_filename != NULL) {
     // TODO: Save the board to out_filename
-    FILE* file_out = fopen(out_filename, "w");
+    FILE *file_out = fopen(out_filename, "w");
     print_board(game,file_out);
     fclose(file_out);
   } else {

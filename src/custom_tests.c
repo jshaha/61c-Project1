@@ -95,41 +95,182 @@ bool test_is_vowel() {
 }
 
 /* Task 4.1 */
-
 bool test_is_tail() {
-  // TODO: Implement this function.
-  return true;
+    if (!is_tail('w')) {
+        printf("FAIL: is_tail('w')\n");
+        return false;
+    }
+
+    if (!is_tail('a')) {
+        printf("FAIL: is_tail('a')\n");
+        return false;
+    }
+
+    if (!is_tail('s')) {
+        printf("FAIL: is_tail('s')\n");
+        return false;
+    }
+
+    if (is_tail('^')) {
+        printf("FAIL: is_tail('^')\n");
+        return false;
+    }
+
+    return true;
 }
 
 bool test_is_head() {
-  // TODO: Implement this function.
-  return true;
+    if (!is_head('W')) {
+        printf("FAIL: is_head('W')\n");
+        return false;
+    }
+
+    if (!is_head('A')) {
+        printf("FAIL: is_head('A')\n");
+        return false;
+    }
+    if (!is_head('D')) {
+        printf("FAIL: is_head('D')\n");
+        return false;
+    }
+
+    if (!is_head('x')) {
+        printf("FAIL: is_head('x')\n");
+        return false;
+    }
+
+    if (is_head('w')) {
+        printf("FAIL: is_head('w')\n");
+        return false;
+    }
+
+    return true;
 }
 
 bool test_is_snake() {
-  // TODO: Implement this function.
-  return true;
+    char snake_chars[] = {'w','a','s','d','^','<','v','>','W','A','S','D','x'};
+    for (int i = 0; i < 13; i++) {
+        if (!is_snake(snake_chars[i])) {
+            printf("FAIL: is_snake('%c')\n", snake_chars[i]);
+            return false;
+        }
+    }
+
+    if (is_snake('#')) {
+        printf("FAIL: is_snake('#')\n");
+        return false;
+    }
+
+    if (is_snake(' ')) {
+        printf("FAIL: is_snake(' ')\n");
+        return false;
+    }
+
+    return true;
 }
 
 bool test_body_to_tail() {
-  // TODO: Implement this function.
-  return true;
+    if (body_to_tail('^') != 'w') {
+        printf("FAIL: body_to_tail('^')\n");
+        return false;
+    }
+
+    if (body_to_tail('<') != 'a') {
+        printf("FAIL: body_to_tail('<')\n");
+        return false;
+    }
+
+    if (body_to_tail('v') != 's') {
+        printf("FAIL: body_to_tail('v')\n");
+        return false;
+    }
+
+    if (body_to_tail('>') != 'd') {
+        printf("FAIL: body_to_tail('>')\n");
+        return false;
+    }
+
+    return true;
 }
 
 bool test_head_to_body() {
-  // TODO: Implement this function.
-  return true;
+    if (head_to_body('W') != '^') {
+        printf("FAIL: head_to_body('W')\n");
+        return false;
+    }
+
+    if (head_to_body('A') != '<') {
+        printf("FAIL: head_to_body('A')\n");
+        return false;
+    }
+
+    if (head_to_body('S') != 'v') {
+        printf("FAIL: head_to_body('S')\n");
+        return false;
+    }
+
+    if (head_to_body('D') != '>') {
+        printf("FAIL: head_to_body('D')\n");
+        return false;
+    }
+
+    return true;
 }
 
 bool test_get_next_row() {
-  // TODO: Implement this function.
-  return true;
+    if (get_next_row(5, 'v') != 6) {
+        printf("FAIL: get_next_row(5, 'v')\n");
+        return false;
+    }
+
+    if (get_next_row(5, 's') != 6) {
+        printf("FAIL: get_next_row(5, 's')\n");
+        return false;
+    }
+    if (get_next_row(5, '^') != 4) {
+        printf("FAIL: get_next_row(5, '^')\n");
+        return false;
+    }
+
+    if (get_next_row(5, 'w') != 4) {
+        printf("FAIL: get_next_row(5, 'w')\n");
+        return false;
+    }
+    if (get_next_row(5, '>') != 5) {
+        printf("FAIL: get_next_row(5, '>')\n");
+        return false;
+    
+    }
+    return true;
 }
 
 bool test_get_next_col() {
-  // TODO: Implement this function.
-  return true;
+    if (get_next_col(5, '>') != 6) {
+        printf("FAIL: get_next_col(5, '>')\n");
+        return false;
+    }
+    if (get_next_col(5, 'd') != 6) {
+        printf("FAIL: get_next_col(5, 'd')\n");
+        return false;
+    }
+
+    if (get_next_col(5, 'D') != 6) {
+        printf("FAIL: get_next_col(5, 'D')\n");
+        return false;
+    }
+    if (get_next_col(5, 'a') != 4) {
+        printf("FAIL: get_next_col(5, 'a')\n");
+        return false;
+    }
+
+    if (get_next_col(5, '^') != 5) {
+        printf("FAIL: get_next_col(5, '^')\n");
+        return false;
+    }
+    return true;
 }
+
+
 
 bool test_customs() {
   if (!test_greater_than_forty_two()) {
