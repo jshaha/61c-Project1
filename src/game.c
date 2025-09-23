@@ -358,7 +358,7 @@ char *read_line(FILE *fp) {
             free(buffer);
             return NULL;
         }
-        buffer = tmp;
+        buffer = temp;
     }
     if (len == 0) {    
         free(buffer);
