@@ -343,7 +343,7 @@ char *read_line(FILE *fp) {
         return NULL;
     }
 
-    if (fgets(buffer, buf_size, fp) == NULL) { 
+    if (fgets(buffer, (int)buf_size, fp) == NULL) { 
         free(buffer);
         return NULL;
     }
@@ -360,7 +360,7 @@ char *read_line(FILE *fp) {
             buffer = double_buf;
         }
 
-        char* result = fgets(buffer + len, int(buf_size - len), fp);
+        char* result = fgets(buffer + len, (int)(buf_size - len), fp);
         if (result == NULL) { 
             break;
         }
@@ -446,8 +446,8 @@ game_t *initialize_snakes(game_t *game) {
                     return NULL;
                     }
                 
-                game->snakes[game->num_snakes - 1].tail_row = i;
-                game->snakes[game->num_snakes - 1].tail_col = j;
+                game->snakes[game->num_snakes - 1].tail_row = (unsigned int)i;
+                game->snakes[game->num_snakes - 1].tail_col = (unsigned int)j;
                 find_head(game, game->num_snakes - 1);
                 game->snakes[game->num_snakes - 1].live = true;
             }
