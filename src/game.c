@@ -393,7 +393,7 @@ game_t *load_board(FILE *fp) {
     if (game->board == NULL) 
     {
         for (int k = 0; k < game->num_rows - 1; k++) { 
-            free(game->board[k])
+            free(game->board[k]);
         };
             free(line);
             free(game->board);
