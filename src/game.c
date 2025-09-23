@@ -360,7 +360,7 @@ char *read_line(FILE *fp) {
             buffer = double_buf;
         }
 
-        char* result = fgets(buffer + len, buf_size - len, fp);
+        char* result = fgets(buffer + len, int(buf_size - len), fp);
         if (result == NULL) { 
             break;
         }
@@ -433,7 +433,7 @@ game_t *initialize_snakes(game_t *game) {
   // TODO: Implement this function.
 
     game->num_snakes = 0;
-    game->snakes = NULL
+    game->snakes = NULL;
     for(int i = 0; i < game->num_rows;i++) {
         for(int j = 0; game->board[i][j] != '\0'; j++) {
             char curr_char = game->board[i][j];
