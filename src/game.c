@@ -385,7 +385,12 @@ game_t *load_board(FILE *fp) {
     while ((line = read_line(fp)) != NULL) {
         game->num_rows++;
         game->board = realloc(game->board, game->num_rows * sizeof(char*));
-    if (game->board == NULL) {
+    if (game->board == NULL) 
+    {
+        for (int k = 0; k < game->num_rows; k++) free(game->board[k]);
+            free(line);
+            free(game->board);
+            free(game);
         printf("game->board memory failed\n");
         return NULL;
     }
@@ -428,6 +433,7 @@ game_t *initialize_snakes(game_t *game) {
   // TODO: Implement this function.
 
     game->num_snakes = 0;
+    game->snakes = NULL
     for(int i = 0; i < game->num_rows;i++) {
         for(int j = 0; game->board[i][j] != '\0'; j++) {
             char curr_char = game->board[i][j];
@@ -436,6 +442,7 @@ game_t *initialize_snakes(game_t *game) {
                 game->snakes = realloc(game->snakes, game->num_snakes * sizeof(snake_t));
                 if (game->snakes == NULL) {
                     printf("snake struct memory allocation failed\n");
+                    free(game->snakes);
                     return NULL;
                     }
                 
